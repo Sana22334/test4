@@ -10,9 +10,22 @@
 		2629F3082D77141600F8BCEC /* hekayti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hekayti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2629F3672D77583200F8BCEC /* Exceptions for "hekayti" folder in "hekayti" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Content/Info.plist",
+			);
+			target = 2629F3072D77141600F8BCEC /* hekayti */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2629F30A2D77141600F8BCEC /* hekayti */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2629F3672D77583200F8BCEC /* Exceptions for "hekayti" folder in "hekayti" target */,
+			);
 			path = hekayti;
 			sourceTree = "<group>";
 		};
