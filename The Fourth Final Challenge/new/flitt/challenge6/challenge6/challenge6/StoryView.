@@ -1,0 +1,165 @@
+//
+//  Untitled 2.swift
+//  challenge6
+//
+//  Created by saNa on 04/09/1446 AH.
+//
+import SwiftUI
+
+struct StoryView: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    var body: some View {
+        ZStack {
+            // الخلفية بلون #CFE6EC
+            Color(hex: "#CFE6EC")
+                .edgesIgnoringSafeArea(.all)
+
+            VStack(spacing: 0) {
+                // الشريط العلوي
+                HStack {
+                    // زر الحفظ
+                    Button(action: {
+                        saveStory()
+                    }) {
+                        Image(systemName: "square.and.arrow.down")
+                            .font(.title2)
+                            .foregroundColor(.black)
+                    }
+                    .padding(.leading, 20)
+
+                    Spacer()
+
+                    // العنوان
+                    Text("الرحلة التي غيرت كل شيء")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+
+                    Spacer()
+
+                    // زر الرجوع
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "arrow.backward")
+                            .font(.title2)
+                            .foregroundColor(.black)
+                    }
+                    .padding(.trailing, 20)
+                }
+                .padding(.top, 20)
+                .padding(.horizontal)
+
+                Divider()
+                    .padding(.vertical, 10)
+
+                // محتوى القصة
+                HStack(spacing: 0) {
+                    // الصورة
+                    Image("Frame 323") // تأكد من وجود الصورة في Assets
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 436, height: 860)
+                        .clipped()
+
+                    // النص
+                    ZStack {
+                        Color.white
+                            .cornerRadius(10)
+                            .frame(width: 436, height: 860)
+
+                        VStack(alignment: .leading, spacing: 10) {
+                            HStack {
+                                // زر الصوت
+                                Button(action: {
+                                    playAudio()
+                                }) {
+                                    Image(systemName: "speaker.wave.2.fill")
+                                        .font(.title2)
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(.leading, 10)
+
+                                Spacer()
+
+                                // زر الإعادة
+                                Button(action: {
+                                    restartStory()
+                                }) {
+                                    Image(systemName: "arrow.clockwise")
+                                        .font(.title2)
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(10)
+                            }
+                            .padding(.top, 20)
+
+                            // نص القصة
+                            Text("كان هناك شاب يدعى سامي. يعيش في قرية صغيرة حيث كل شيء كان روتينيًا. سامي كان يحلم دائمًا بالسفر واستكشاف العالم من حوله. في يوم من الأيام...")
+                                .font(.title3)
+                                .foregroundColor(.black)
+                                .padding()
+
+                            // نص "اكمل هنا" بدون إطار
+                            Text("...اكمل هنا")
+                                .font(.title3)
+                                .foregroundColor(.black)
+                                .padding(.top, 10)
+
+                            Spacer()
+                        }
+                        .frame(width: 436, height: 860)
+                    }
+                }
+
+                Spacer()
+            }
+        }
+    }
+
+    func saveStory() {
+        print("تم حفظ القصة!")
+    }
+
+    func playAudio() {
+        print("تشغيل الصوت")
+    }
+
+    func restartStory() {
+        print("إعادة تشغيل القصة")
+    }
+}
+
+// تعريف اللون باستخدام Hex
+extension Color {
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(
+            .sRGB,
+            red: Double(r) / 255,
+            green: Double(g) / 255,
+            blue: Double(b) / 255,
+            opacity: Double(a) / 255
+        )
+    }
+}
+
+struct StoryView_Previews: PreviewProvider {
+    static var previews: some View {
+        StoryView()
+    }
+}
